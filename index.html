@@ -1,39 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name — Portfolio</title>
-  <style>
-    body { font-family: Josefin Sans, Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #222; }
-    h1 { margin-bottom: 0; }
-    .subtitle { color: #666; margin-top: 4px; }
-    section { margin-top: 40px; }
-    .project { margin-bottom: 24px; }
-    .project h3 { margin-bottom: 4px; }
-    a { color: #0366d6; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alien+Block&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F0EAD8;
+    --ink: #14171A;
+    --blue: #3B6E9C;
+    --accent: #C23B22;
+    --sand: #C9BFA3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.6;
+  }
+  .hero h1 { font-family: 'Alien Block', sans-serif; font-weight: 400; letter-spacing: 1px; }
+
+  /* ---- Nav ---- */
+  nav {
+    background: var(--ink);
+    color: var(--cream);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 32px;
+  }
+  .brand { font-size: 20px; font-weight: 600; letter-spacing: 0.5px; }
+  nav ul { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
+  nav a { color: var(--cream); text-decoration: none; font-size: 15px; }
+  nav a:hover { color: var(--sand); }
+
+  /* ---- Hero ---- */
+  .hero {
+    background: var(--blue);
+    color: var(--cream);
+    text-align: center;
+    padding: 80px 24px 64px;
+  }
+  .hero img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--cream);
+    margin-bottom: 24px;
+  }
+  .hero h1 { font-size: 44px; font-weight: 700; margin: 0 0 12px; }
+  .hero p { font-size: 17px; max-width: 480px; margin: 0 auto; color: var(--sand); }
+
+  /* ---- Filter bar ---- */
+  .filters {
+    max-width: 900px;
+    margin: -28px auto 0;
+    background: var(--cream);
+    border: 1px solid var(--ink);
+    display: flex;
+    gap: 12px;
+    padding: 14px 20px;
+    position: relative;
+    z-index: 2;
+    flex-wrap: wrap;
+  }
+  .filters select, .filters input {
+    font-family: 'Inter', sans-serif;
+    border: 1px solid var(--sand);
+    background: white;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  .filters input { flex: 1; min-width: 140px; }
+
+  /* ---- Projects grid ---- */
+  main { max-width: 900px; margin: 0 auto; padding: 56px 20px 80px; }
+  main h2 { font-size: 22px; margin-bottom: 28px; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+  .card { background: white; border: 1px solid var(--ink); position: relative; }
+  .card img { width: 100%; height: 170px; object-fit: cover; display: block; border-bottom: 1px solid var(--ink); }
+  .card .tag {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--accent); color: var(--cream);
+    font-size: 12px; padding: 3px 10px;
+  }
+  .card .body { padding: 16px 18px 20px; }
+  .card h3 { font-size: 18px; margin: 0 0 8px; }
+  .card p { font-size: 14px; color: #444; margin: 0 0 10px; }
+  .card .meta { font-size: 12px; color: var(--sand); }
+
+  footer { text-align: center; padding: 30px; font-size: 13px; color: var(--sand); background: var(--ink); }
+</style>
 </head>
 <body>
+
+<nav>
+  <div class="brand">Your Name</div>
+  <ul>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <!-- Replace src with your own photo, e.g. images/me.jpg -->
+  <img src="https://placehold.co/140x140/14171A/F0EAD8?text=Photo" alt="Your photo">
   <h1>Your Name</h1>
-  <p class="subtitle">Mechanical Engineering Student, Anderson University</p>
+  <p>Mechanical engineering student at Anderson University. Design, simulation, and hands-on builds.</p>
+</section>
 
-  <section>
-    <h2>About</h2>
-    <p>A short paragraph about who you are, what you're studying, and what kind of work you're interested in.</p>
-  </section>
+<div class="filters">
+  <select><option>All Types</option><option>Simulation</option><option>Design</option><option>CAD</option></select>
+  <select><option>All Sources</option></select>
+  <input type="text" placeholder="Search projects...">
+</div>
 
-  <section>
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Project Name</h3>
-      <p>One or two sentences: the problem, what you did, and the result.</p>
+<main id="projects">
+  <h2>Selected Projects</h2>
+  <div class="grid">
+
+    <div class="card">
+      <span class="tag">SolidWorks</span>
+      <img src="https://placehold.co/500x300/3B6E9C/F0EAD8?text=Project+Image" alt="Table simulation project">
+      <div class="body">
+        <h3>Table Structural Analysis</h3>
+        <p>Stress mapping, deformation, vibration modes, and drop-test simulation for a table design in SolidWorks.</p>
+        <div class="meta">ENGR 440 · 2026</div>
+      </div>
     </div>
-  </section>
 
-  <section>
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
-  </section>
+    <div class="card">
+      <span class="tag">CAD</span>
+      <img src="https://placehold.co/500x300/C23B22/F0EAD8?text=Project+Image" alt="Second project">
+      <div class="body">
+        <h3>Project Name</h3>
+        <p>One or two sentences on the problem, your role, and the outcome.</p>
+        <div class="meta">Course or Client · Year</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer id="contact">
+  you@example.com — <a href="#" style="color: var(--cream);">LinkedIn</a> · <a href="#" style="color: var(--cream);">GitHub</a>
+</footer>
+
 </body>
 </html>
