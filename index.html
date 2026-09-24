@@ -1,162 +1,587 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Name — Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Alien+Block&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cream: #F0EAD8;
-    --ink: #14171A;
-    --blue: #3B6E9C;
-    --accent: #C23B22;
-    --sand: #C9BFA3;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--cream);
-    color: var(--ink);
-    font-family: 'IBM Plex Mono', monospace;
-    line-height: 1.6;
-  }
-  .hero h1 { font-family: 'Alien Block', sans-serif; font-weight: 400; letter-spacing: 1px; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nathan Flachman — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alien+Block&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #F0EAD8;
+      --ink: #14171A;
+      --blue: #3B6E9C;
+      --accent: #C23B22;
+      --sand: #C9BFA3;
+    }
 
-  /* ---- Nav ---- */
-  nav {
-    background: var(--ink);
-    color: var(--cream);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 32px;
-  }
-  .brand { font-size: 20px; font-weight: 600; letter-spacing: 0.5px; }
-  nav ul { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
-  nav a { color: var(--cream); text-decoration: none; font-size: 15px; }
-  nav a:hover { color: var(--sand); }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  /* ---- Hero ---- */
-  .hero {
-    background: var(--blue);
-    color: var(--cream);
-    text-align: center;
-    padding: 80px 24px 64px;
-  }
-  .hero img {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--cream);
-    margin-bottom: 24px;
-  }
-  .hero h1 { font-size: 44px; font-weight: 700; margin: 0 0 12px; }
-  .hero p { font-size: 17px; max-width: 480px; margin: 0 auto; color: var(--sand); }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      line-height: 1.6;
+    }
 
-  /* ---- Filter bar ---- */
-  .filters {
-    max-width: 900px;
-    margin: -28px auto 0;
-    background: var(--cream);
-    border: 1px solid var(--ink);
-    display: flex;
-    gap: 12px;
-    padding: 14px 20px;
-    position: relative;
-    z-index: 2;
-    flex-wrap: wrap;
-  }
-  .filters select, .filters input {
-    font-family: 'Inter', sans-serif;
-    border: 1px solid var(--sand);
-    background: white;
-    padding: 8px 12px;
-    font-size: 14px;
-  }
-  .filters input { flex: 1; min-width: 140px; }
+    /* ---- Nav ---- */
+    nav {
+      background: var(--ink);
+      color: var(--cream);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px;
+    }
 
-  /* ---- Projects grid ---- */
-  main { max-width: 900px; margin: 0 auto; padding: 56px 20px 80px; }
-  main h2 { font-size: 22px; margin-bottom: 28px; }
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-  }
-  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+    .brand {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
 
-  .card { background: white; border: 1px solid var(--ink); position: relative; }
-  .card img { width: 100%; height: 170px; object-fit: cover; display: block; border-bottom: 1px solid var(--ink); }
-  .card .tag {
-    position: absolute; top: 12px; left: 12px;
-    background: var(--accent); color: var(--cream);
-    font-size: 12px; padding: 3px 10px;
-  }
-  .card .body { padding: 16px 18px 20px; }
-  .card h3 { font-size: 18px; margin: 0 0 8px; }
-  .card p { font-size: 14px; color: #444; margin: 0 0 10px; }
-  .card .meta { font-size: 12px; color: var(--sand); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
 
-  footer { text-align: center; padding: 30px; font-size: 13px; color: var(--sand); background: var(--ink); }
-</style>
+    nav a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 15px;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--sand);
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      background: var(--blue);
+      color: var(--cream);
+      text-align: center;
+      padding: 80px 24px 64px;
+    }
+
+    .hero img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--cream);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Alien Block', sans-serif;
+      font-size: 44px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      max-width: 520px;
+      margin: 0 auto;
+      color: var(--sand);
+    }
+
+    /* ---- Filter bar ---- */
+    .filters {
+      max-width: 900px;
+      margin: -28px auto 0;
+      background: var(--cream);
+      border: 1px solid var(--ink);
+      display: flex;
+      gap: 12px;
+      padding: 14px 20px;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
+    }
+
+    .filters select,
+    .filters input {
+      font-family: 'IBM Plex Mono', monospace;
+      border: 1px solid var(--sand);
+      background: white;
+      padding: 8px 12px;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .filters input {
+      flex: 1;
+      min-width: 140px;
+    }
+
+    /* ---- Projects grid ---- */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 56px 20px 80px;
+    }
+
+    main h2 {
+      font-size: 22px;
+      margin-bottom: 28px;
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--ink);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .card .tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--accent);
+      color: var(--cream);
+      font-size: 12px;
+      padding: 3px 10px;
+      font-weight: 500;
+    }
+
+    .card .body {
+      padding: 16px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin: 0 0 8px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #333;
+      margin: 0 0 14px;
+      flex-grow: 1;
+    }
+
+    .card .meta {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .card .view-link {
+      font-size: 13px;
+      color: var(--blue);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .card .view-link:hover {
+      color: var(--accent);
+    }
+
+    /* ---- Case Study Section ---- */
+    .case-study {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 20px 90px;
+    }
+
+    .case-study-header {
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 20px;
+      margin-bottom: 36px;
+    }
+
+    .case-study-header .tag {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--cream);
+      font-size: 12px;
+      padding: 3px 10px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .case-study-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .case-study-header .meta-row {
+      font-size: 13px;
+      color: #555;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .case-study-header .meta-row span {
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    .case-study-header p {
+      font-size: 15px;
+      color: #333;
+      max-width: 700px;
+    }
+
+    .cs-subhead {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 44px 0 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cs-subhead::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      display: inline-block;
+      transform: rotate(45deg); /* diamond motif nod to Avant Garde covers */
+    }
+
+    .sub-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    @media (max-width: 640px) {
+      .sub-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .fig {
+      background: white;
+      border: 1px solid var(--ink);
+    }
+
+    .fig img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .fig figcaption {
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #333;
+    }
+
+    .fig figcaption .fig-title {
+      display: block;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+      font-size: 13.5px;
+    }
+
+    .video-block {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 24px;
+    }
+
+    .video-block video {
+      width: 100%;
+      display: block;
+      border: 2px solid var(--sand);
+    }
+
+    .video-block figcaption {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--sand);
+    }
+
+    .drop-test-note {
+      background: white;
+      border: 1px dashed var(--sand);
+      padding: 18px 20px;
+      font-size: 13.5px;
+      color: #444;
+    }
+
+    .back-to-projects {
+      display: inline-block;
+      margin-top: 40px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .back-to-projects:hover {
+      color: var(--accent);
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 13px;
+      color: var(--sand);
+      background: var(--ink);
+    }
+
+    footer a {
+      color: var(--cream);
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: var(--sand);
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <div class="brand">Your Name</div>
-  <ul>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+  <nav>
+    <div class="brand">Nathan Flachman</div>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#table-project">Table FEA</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-<section class="hero">
-  <!-- Replace src with your own photo, e.g. images/me.jpg -->
-  <img src="https://placehold.co/140x140/14171A/F0EAD8?text=Photo" alt="Your photo">
-  <h1>Your Name</h1>
-  <p>Mechanical engineering student at Anderson University. Design, simulation, and hands-on builds.</p>
-</section>
+  <section class="hero">
+    <!-- Replace src with your local image path, e.g., images/profile.jpg -->
+    <img src="https://placehold.co/140x140/14171A/F0EAD8?text=Photo" alt="Nathan Flachman">
+    <h1>Nathan Flachman</h1>
+    <p>Mechanical engineering student at Anderson University. Design, simulation, and hands-on builds.</p>
+  </section>
 
-<div class="filters">
-  <select><option>All Types</option><option>Simulation</option><option>Design</option><option>CAD</option></select>
-  <select><option>All Sources</option></select>
-  <input type="text" placeholder="Search projects...">
-</div>
-
-<main id="projects">
-  <h2>Selected Projects</h2>
-  <div class="grid">
-
-    <div class="card">
-      <span class="tag">SolidWorks</span>
-      <img src="https://placehold.co/500x300/3B6E9C/F0EAD8?text=Project+Image" alt="Table simulation project">
-      <div class="body">
-        <h3>Table Structural Analysis</h3>
-        <p>Stress mapping, deformation, vibration modes, and drop-test simulation for a table design in SolidWorks.</p>
-        <div class="meta">ENGR 440 · 2026</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <span class="tag">CAD</span>
-      <img src="https://placehold.co/500x300/C23B22/F0EAD8?text=Project+Image" alt="Second project">
-      <div class="body">
-        <h3>Project Name</h3>
-        <p>One or two sentences on the problem, your role, and the outcome.</p>
-        <div class="meta">Course or Client · Year</div>
-      </div>
-    </div>
-
+  <div class="filters">
+    <select id="typeFilter">
+      <option value="all">All Types</option>
+      <option value="simulation">Simulation</option>
+      <option value="design">Design</option>
+      <option value="cad">CAD</option>
+    </select>
+    <select id="sourceFilter">
+      <option value="all">All Sources</option>
+      <option value="academic">Academic (ENGR)</option>
+      <option value="personal">Personal / Extracurricular</option>
+    </select>
+    <input type="text" id="searchInput" placeholder="Search projects...">
   </div>
-</main>
 
-<footer id="contact">
-  you@example.com — <a href="#" style="color: var(--cream);">LinkedIn</a> · <a href="#" style="color: var(--cream);">GitHub</a>
-</footer>
+  <main id="projects">
+    <h2>Selected Projects</h2>
+    <div class="grid">
+
+      <!-- Project 1: links down to the full case study -->
+      <div class="card" data-type="simulation" data-source="academic">
+        <span class="tag">SolidWorks</span>
+        <img src="https://placehold.co/500x300/3B6E9C/F0EAD8?text=Table+FEA" alt="Table structural and vibration analysis">
+        <div class="body">
+          <h3>Table Structural &amp; Vibration Analysis</h3>
+          <p>Von Mises stress mapping, deformation, and modal/vibration analysis on a Maple table design, plus a drop test, run in SolidWorks Simulation.</p>
+          <div class="meta">ENGR 440 · Anderson University · 2026</div>
+          <a class="view-link" href="#table-project">View full case study →</a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="card" data-type="cad" data-source="academic">
+        <span class="tag">CAD</span>
+        <img src="https://placehold.co/500x300/C23B22/F0EAD8?text=Project+Image" alt="CAD Project">
+        <div class="body">
+          <h3>Project Title</h3>
+          <p>Brief summary of design constraints, engineering decisions, and final deliverables.</p>
+          <div class="meta">Course / Lab · Year</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============================================= -->
+  <!-- FULL CASE STUDY: Table Structural & Vibration Analysis -->
+  <!-- ============================================= -->
+  <section class="case-study" id="table-project">
+
+    <div class="case-study-header">
+      <span class="tag">SolidWorks Simulation</span>
+      <h2>Table Structural &amp; Vibration Analysis</h2>
+      <div class="meta-row">
+        <span>ENGR 440</span> · Anderson University · Material: Maple · 9/14/2026
+      </div>
+      <p>
+        Using a table design modeled in SolidWorks, I ran a series of static and dynamic
+        finite-element studies to evaluate how the structure responds to a 200&nbsp;lb load
+        applied at four different locations, characterized the resulting deformation,
+        extracted the first three vibration mode shapes and natural frequencies, and
+        performed a drop test to evaluate impact response.
+      </p>
+    </div>
+
+    <!-- A) Four stress maps -->
+    <h3 class="cs-subhead">Static Stress Analysis — 200 lb Load Cases</h3>
+    <div class="sub-grid">
+
+      <figure class="fig">
+        <!-- Swap src for your own screenshot, e.g. images/stress-narrow-edge.png -->
+        <img src="https://placehold.co/500x300/3B6E9C/F0EAD8?text=Stress+%E2%80%94+Narrow+Edge" alt="Von Mises stress map, 200 lb load at one narrow edge">
+        <figcaption>
+          <span class="fig-title">A · One narrow edge</span>
+          Von Mises stress distribution from a 200 lb load applied at the edge of one narrow
+          end of the tabletop. Blue support legs and pad points carry the reaction load while
+          stress concentrates near the loaded edge.
+        </figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="https://placehold.co/500x300/3B6E9C/F0EAD8?text=Stress+%E2%80%94+Both+Narrow+Edges" alt="Von Mises stress map, 200 lb load at both narrow edges">
+        <figcaption>
+          <span class="fig-title">B · Both narrow edges</span>
+          Stress result with the 200 lb load split across both narrow ends. The curved
+          tabletop shows a more even rainbow stress gradient across the span compared to the
+          single-edge case.
+        </figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="https://placehold.co/500x300/3B6E9C/F0EAD8?text=Stress+%E2%80%94+Middle" alt="Von Mises stress map, 200 lb load at middle of table">
+        <figcaption>
+          <span class="fig-title">C · Middle of the table</span>
+          Deformation/stress plot for the center-loaded case, showing displacement magnitude
+          across the curved surface with the color scale mapping smaller (blue) to larger
+          (red) values.
+        </figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="https://placehold.co/500x300/3B6E9C/F0EAD8?text=Stress+%E2%80%94+Long+Edge" alt="Von Mises stress map, 200 lb load at one long side">
+        <figcaption>
+          <span class="fig-title">D · One long side</span>
+          Stress result for the load applied along a long edge, modeled here as a curved
+          beam/bridge-like structure — orange-to-red stress concentrations appear along the
+          loaded span.
+        </figcaption>
+      </figure>
+
+    </div>
+
+    <!-- B) Deformation -->
+    <h3 class="cs-subhead">Deformation — Case A (One Narrow Edge)</h3>
+    <div class="sub-grid">
+      <figure class="fig">
+        <img src="https://placehold.co/500x300/C23B22/F0EAD8?text=Deformation+%E2%80%94+Case+A" alt="Deformation of table end under 200 lb load at narrow edge">
+        <figcaption>
+          <span class="fig-title">Deformation, narrow-edge loading</span>
+          Displacement plot of the loaded end under the 200 lb narrow-edge load. Purple load
+          arrows mark the applied force locations, with the color legend mapping response
+          magnitude across the seat/tabletop.
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- C) Three vibration mode maps -->
+    <h3 class="cs-subhead">Vibration Mode Analysis — First Three Harmonics</h3>
+    <div class="sub-grid">
+
+      <figure class="fig">
+        <img src="https://placehold.co/500x300/14171A/F0EAD8?text=Mode+1" alt="Vibration mode shape map, mode 1">
+        <figcaption>
+          <span class="fig-title">Mode 1</span>
+          First natural mode shape under the Case A boundary conditions, with amplitude
+          mapped by color across the curved plate.
+        </figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="https://placehold.co/500x300/14171A/F0EAD8?text=Mode+2" alt="Vibration mode shape map, mode 2">
+        <figcaption>
+          <span class="fig-title">Mode 2</span>
+          Second harmonic mode shape and corresponding frequency, extracted from the
+          frequency study's mode list.
+        </figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="https://placehold.co/500x300/14171A/F0EAD8?text=Mode+3" alt="Vibration mode shape map, mode 3">
+        <figcaption>
+          <span class="fig-title">Mode 3</span>
+          Third harmonic mode shape, completing the first three natural frequencies used for
+          the vibration study.
+        </figcaption>
+      </figure>
+
+    </div>
+
+    <!-- D) Embedded video -->
+    <h3 class="cs-subhead">Vibration Mode Animation</h3>
+    <div class="video-block">
+      <!--
+        Upload your mode-2 animation as an .mp4 into a /videos/ folder in your repo
+        (e.g. videos/mode2-animation.mp4) and update the src below.
+        This embeds the actual video file, not a link to it.
+      -->
+      <video controls poster="https://placehold.co/900x500/14171A/C9BFA3?text=Mode+2+Animation">
+        <source src="videos/mode2-animation.mp4" type="video/mp4">
+        Your browser does not support embedded video.
+      </video>
+      <figcaption>Animation of vibration mode 2, showing the oscillatory deflection pattern over one cycle.</figcaption>
+    </div>
+
+    <!-- Drop test -->
+    <h3 class="cs-subhead">Drop Test</h3>
+    <div class="drop-test-note">
+      Add your drop-test screenshot or clip here once exported from SolidWorks — either a
+      simplified version of the table (if the full assembly is too heavy to simulate) dropped
+      onto a rigid surface, or an object dropped onto the tabletop. Swap this note for a
+      <code>&lt;figure class="fig"&gt;</code> image block or another <code>.video-block</code>,
+      matching the pattern used above.
+    </div>
+
+    <a class="back-to-projects" href="#projects">← Back to all projects</a>
+  </section>
+
+  <footer id="contact">
+    <p>nathan@example.com — <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com" target="_blank" rel="noopener">GitHub</a></p>
+  </footer>
 
 </body>
 </html>
