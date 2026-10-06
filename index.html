@@ -1,596 +1,756 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nathan Flachman — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alien+Block&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --cream: #F5F2EB;
-      --ink: #3A3F41;
-      --blue: #719C87;
-      --accent: #C16A4F;
-      --sand: #C9BFA3;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nathan Flachman — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alien+Block&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     MONOCHROMATIC NEON BLUE / CYBERPUNK FILM-CREDIT THEME
+     - Pure electric cyan / blue glows matching the reference
+     - Near-black high-contrast backdrop with scanlines
+     - Clean typographic credits hierarchy
+     - Collapsible project reveal sections (closed by default)
+  ========================================================= */
+  :root {
+    --bg: #06080C;
+    --panel: #0A0E14;
+    --panel-border: #142834;
+    
+    --neon-blue: #4FF2FF;        /* Primary electric glow */
+    --neon-blue-bright: #94FBFF; /* Highlight / core glow */
+    --neon-blue-dim: #216775;    /* Muted accent / subheaders */
+    --hairline: #102129;
+    
+    --text: #EDF8FC;
+    --muted: #5E7E88;
+  }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
 
-    body {
-      background: var(--cream);
-      color: var(--ink);
-      font-family: 'IBM Plex Mono', monospace;
-      line-height: 1.6;
-    }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.7;
+    position: relative;
+  }
 
-    /* ---- Nav ---- */
-    nav {
-      background: var(--ink);
-      color: var(--cream);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 32px;
-    }
+  /* CRT scanline texture overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(79, 242, 255, 0.015) 0px,
+      rgba(79, 242, 255, 0.015) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+    z-index: 999;
+  }
 
-    .brand {
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
+  /* Glow Utilities (All-Blue) */
+  .glow-fill {
+    color: var(--neon-blue);
+    text-shadow: 0 0 8px var(--neon-blue), 0 0 22px rgba(79,242,255,0.6), 0 0 45px rgba(79,242,255,0.25);
+  }
+  .glow-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.2px var(--neon-blue);
+    filter: drop-shadow(0 0 8px rgba(79,242,255,0.7)) drop-shadow(0 0 20px rgba(79,242,255,0.35));
+  }
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 28px;
-    }
+  /* Legal text divider motif from reference */
+  .legal-divider {
+    max-width: 540px;
+    margin: 56px auto;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    padding: 18px 20px;
+  }
 
-    nav a {
-      color: var(--cream);
-      text-decoration: none;
-      font-size: 15px;
-      transition: color 0.2s ease;
-    }
+  /* Minimal Top Header */
+  header.topline {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(6, 8, 12, 0.9);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    padding: 16px 20px;
+    flex-wrap: wrap;
+  }
+  header.topline a {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+  }
+  header.topline a:hover {
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px rgba(79,242,255,0.7);
+  }
 
-    nav a:hover {
-      color: var(--sand);
-    }
+  /* Hero Section */
+  .hero {
+    text-align: center;
+    padding: 110px 24px 60px;
+    position: relative;
+  }
+  .hero img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 12px rgba(79,242,255,0.6), 0 0 30px rgba(79,242,255,0.25);
+    margin-bottom: 24px;
+  }
+  .hero .eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--neon-blue-dim);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Alien Block', sans-serif;
+    font-weight: 400;
+    font-size: clamp(42px, 9vw, 84px);
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+  .hero .role-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--neon-blue);
+    border: 1px solid var(--neon-blue-dim);
+    padding: 4px 14px;
+    margin-bottom: 18px;
+    box-shadow: 0 0 10px rgba(79,242,255,0.15);
+  }
+  .hero p {
+    font-size: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+    color: var(--muted);
+  }
+  .hero .stamp {
+    position: absolute;
+    bottom: 14px;
+    right: 24px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--neon-blue-dim);
+    text-transform: uppercase;
+  }
 
-    /* ---- Hero ---- */
-    .hero {
-      background: var(--blue);
-      color: var(--cream);
-      text-align: center;
-      padding: 80px 24px 64px;
-    }
+  /* Index / Table of Contents */
+  .index-section {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px 24px 70px;
+    text-align: center;
+  }
+  .index-section .index-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+  .index-entry {
+    display: block;
+    text-decoration: none;
+    margin-bottom: 38px;
+  }
+  .index-entry:last-child { margin-bottom: 0; }
+  .index-entry .title {
+    font-size: clamp(26px, 5vw, 36px);
+    letter-spacing: 1px;
+    display: inline-block;
+    transition: filter 0.25s ease, transform 0.25s ease;
+  }
+  .index-entry .subtitle {
+    display: block;
+    margin-top: 8px;
+    font-size: 11.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .index-entry:hover .title {
+    filter: drop-shadow(0 0 12px rgba(79,242,255,0.9)) drop-shadow(0 0 28px rgba(79,242,255,0.5));
+    transform: translateY(-1px);
+  }
 
-    .hero img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--cream);
-      margin-bottom: 24px;
-    }
+  /* SVG Stamp Divider */
+  .stamp-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 44px 20px;
+  }
+  .stamp-divider .refno {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px rgba(79,242,255,0.5);
+  }
+  .stamp-divider svg { filter: drop-shadow(0 0 10px rgba(79,242,255,0.5)); }
+  .stamp-divider .org {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
 
-    .hero h1 {
-      font-family: 'Alien Block', sans-serif;
-      font-size: 60px;
-      font-weight: 200;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
+  /* Collapsible Project Sections */
+  details.project-reveal {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px;
+    border-top: 1px solid var(--hairline);
+  }
 
-    .hero p {
-      font-size: 17px;
-      max-width: 520px;
-      margin: 0 auto;
-      color: var(--sand);
-    }
+  details.project-reveal summary {
+    list-style: none;
+    cursor: pointer;
+    text-align: center;
+    padding: 56px 0 28px;
+    position: relative;
+  }
+  details.project-reveal summary::-webkit-details-marker { display: none; }
 
-    /* ---- Filter bar ---- */
-    .filters {
-      max-width: 900px;
-      margin: -28px auto 0;
-      background: var(--cream);
-      border: 1px solid var(--ink);
-      display: flex;
-      gap: 12px;
-      padding: 14px 20px;
-      position: relative;
-      z-index: 2;
-      flex-wrap: wrap;
-    }
+  .kicker {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--neon-blue);
+    margin-bottom: 16px;
+    text-shadow: 0 0 8px rgba(79,242,255,0.4);
+  }
+  details.project-reveal summary h2 {
+    font-size: clamp(28px, 5.5vw, 48px);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+  .meta-line {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--neon-blue-dim);
+    margin-bottom: 6px;
+  }
 
-    .filters select,
-    .filters input {
-      font-family: 'IBM Plex Mono', monospace;
-      border: 1px solid var(--sand);
-      background: white;
-      padding: 8px 12px;
-      font-size: 14px;
-      color: var(--ink);
-    }
+  .toggle-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--neon-blue);
+    border-radius: 50%;
+    color: var(--neon-blue);
+    font-size: 15px;
+    margin-top: 8px;
+    box-shadow: 0 0 10px rgba(79,242,255,0.4);
+    transition: transform 0.25s ease;
+  }
+  details.project-reveal[open] summary .toggle-indicator {
+    transform: rotate(45deg);
+  }
 
-    .filters input {
-      flex: 1;
-      min-width: 140px;
-    }
+  .toggle-hint {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
 
-    /* ---- Projects grid ---- */
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 56px 20px 80px;
-    }
+  /* Reveal Content Body */
+  .reveal-body {
+    text-align: center;
+    padding-bottom: 80px;
+  }
+  .desc {
+    max-width: 600px;
+    margin: 0 auto 16px;
+    font-size: 14.5px;
+    color: var(--muted);
+  }
 
-    main h2 {
-      font-size: 22px;
-      margin-bottom: 28px;
-      font-weight: 600;
-    }
+  .sub-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    text-align: left;
+    margin-top: 14px;
+  }
+  @media (max-width: 640px) { .sub-grid { grid-template-columns: 1fr; } }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-    }
+  .fig {
+    border: 1px solid var(--panel-border);
+    background: var(--panel);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .fig:hover {
+    border-color: var(--neon-blue-dim);
+    box-shadow: 0 0 14px rgba(79,242,255,0.1);
+  }
+  .fig img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    filter: saturate(1.1);
+    border-bottom: 1px solid var(--panel-border);
+  }
+  .fig figcaption {
+    padding: 12px 14px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .fig figcaption .fig-title {
+    display: block;
+    font-weight: 600;
+    color: var(--neon-blue);
+    margin-bottom: 4px;
+    font-size: 12.5px;
+    letter-spacing: 0.5px;
+  }
 
-    @media (max-width: 640px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
+  .cs-subhead {
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 48px 0 18px;
+    color: var(--neon-blue);
+    text-align: center;
+    text-shadow: 0 0 8px rgba(79,242,255,0.3);
+  }
 
-    .card {
-      background: white;
-      border: 1px solid var(--ink);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
+  .video-block {
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 18px rgba(79,242,255,0.15);
+    background: var(--panel);
+    padding: 20px;
+    margin-top: 14px;
+  }
+  .video-block video {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--panel-border);
+  }
+  .video-block figcaption {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: left;
+  }
 
-    .card img {
-      width: 100%;
-      height: 170px;
-      object-fit: cover;
-      display: block;
-      border-bottom: 1px solid var(--ink);
-    }
+  .drop-test-note {
+    border: 1px dashed var(--neon-blue-dim);
+    background: var(--panel);
+    padding: 18px 20px;
+    font-size: 12.5px;
+    color: var(--muted);
+    text-align: left;
+    margin-top: 14px;
+  }
+  .drop-test-note code { color: var(--neon-blue); }
 
-    .card .tag {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: var(--accent);
-      color: var(--cream);
-      font-size: 12px;
-      padding: 3px 10px;
-      font-weight: 500;
-    }
+  .back-link {
+    display: inline-block;
+    margin-top: 46px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--neon-blue);
+    text-decoration: none;
+    transition: text-shadow 0.2s ease;
+  }
+  .back-link:hover {
+    text-shadow: 0 0 10px rgba(79,242,255,0.8);
+  }
 
-    .card .body {
-      padding: 16px 18px 20px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
+  /* Resume Section */
+  .resume-section {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 70px 24px 90px;
+    text-align: center;
+    border-top: 1px solid var(--hairline);
+  }
+  .resume-fig {
+    margin: 30px auto 24px;
+    overflow: hidden;
+    width: min(580px, 92%);
+    aspect-ratio: 8.5 / 11;
+    border: 1px solid var(--neon-blue-dim);
+    box-shadow: 0 0 16px rgba(79,242,255,0.1);
+  }
+  .resume-actions a {
+    display: inline-block;
+    padding: 11px 20px;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0 6px 10px;
+    border: 1px solid var(--neon-blue);
+    background: var(--bg);
+    color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(79,242,255,0.2);
+    transition: box-shadow 0.2s ease, background 0.2s ease;
+  }
+  .resume-actions a:hover {
+    box-shadow: 0 0 18px rgba(79,242,255,0.5);
+    background: rgba(79,242,255,0.06);
+  }
 
-    .card h3 {
-      font-size: 18px;
-      margin: 0 0 8px;
-    }
-
-    .card p {
-      font-size: 14px;
-      color: #333;
-      margin: 0 0 14px;
-      flex-grow: 1;
-    }
-
-    .card .meta {
-      font-size: 12px;
-      color: #666;
-    }
-
-    .card .view-link {
-      font-size: 13px;
-      color: var(--blue);
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .card .view-link:hover {
-      color: var(--accent);
-    }
-
-    /* ---- Case Study Section ---- */
-    .case-study {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px 20px 90px;
-    }
-
-    .case-study-header {
-      border-bottom: 3px solid var(--ink);
-      padding-bottom: 20px;
-      margin-bottom: 36px;
-    }
-
-    .case-study-header .tag {
-      display: inline-block;
-      background: var(--accent);
-      color: var(--cream);
-      font-size: 12px;
-      padding: 3px 10px;
-      font-weight: 500;
-      margin-bottom: 12px;
-    }
-
-    .case-study-header h2 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .case-study-header .meta-row {
-      font-size: 13px;
-      color: #555;
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .case-study-header .meta-row span {
-      color: var(--blue);
-      font-weight: 600;
-    }
-
-    .case-study-header p {
-      font-size: 15px;
-      color: #333;
-      max-width: 700px;
-    }
-
-    .cs-subhead {
-      font-size: 18px;
-      font-weight: 700;
-      margin: 44px 0 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .cs-subhead::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      background: var(--accent);
-      display: inline-block;
-      transform: rotate(45deg); /* diamond motif nod to Avant Garde covers */
-    }
-
-    .sub-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 22px;
-    }
-
-    @media (max-width: 640px) {
-      .sub-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .fig {
-      background: white;
-      border: 1px solid var(--ink);
-    }
-
-    .fig img {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-      display: block;
-      border-bottom: 1px solid var(--ink);
-    }
-
-    .fig figcaption {
-      padding: 12px 14px;
-      font-size: 13px;
-      color: #333;
-    }
-
-    .fig figcaption .fig-title {
-      display: block;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 4px;
-      font-size: 13.5px;
-    }
-
-    .video-block {
-      background: var(--ink);
-      color: var(--cream);
-      padding: 24px;
-    }
-
-    .video-block video {
-      width: 100%;
-      display: block;
-      border: 2px solid var(--sand);
-    }
-
-    .video-block figcaption {
-      margin-top: 12px;
-      font-size: 13px;
-      color: var(--sand);
-    }
-
-    .drop-test-note {
-      background: white;
-      border: 1px dashed var(--sand);
-      padding: 18px 20px;
-      font-size: 13.5px;
-      color: #444;
-    }
-
-    .back-to-projects {
-      display: inline-block;
-      margin-top: 40px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--blue);
-      text-decoration: none;
-    }
-
-    .back-to-projects:hover {
-      color: var(--accent);
-    }
-
-    /* ---- Footer ---- */
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 13px;
-      color: var(--sand);
-      background: var(--ink);
-    }
-
-    footer a {
-      color: var(--cream);
-      text-decoration: underline;
-    }
-
-    footer a:hover {
-      color: var(--sand);
-    }
-  </style>
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 60px 24px 50px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--hairline);
+  }
+  footer a {
+    color: var(--neon-blue);
+    text-decoration: none;
+  }
+  footer a:hover {
+    text-shadow: 0 0 8px rgba(79,242,255,0.7);
+  }
+  footer .legal {
+    max-width: 500px;
+    margin: 20px auto 0;
+    font-size: 10.5px;
+    line-height: 1.7;
+    color: #384F57;
+  }
+  footer .refno {
+    margin-top: 18px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--neon-blue-dim);
+    text-transform: uppercase;
+  }
+</style>
 </head>
 <body>
 
-  <nav>
-    <div class="brand">Nathan Flachman</div>
-    <ul>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#table-project">Table FEA</a></li>
-      <li><a href="docs/resume.pdf" target="_blank" rel="noopener">Resume</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <header class="topline">
+    <a href="#top">Top</a>
+    <a href="#index">Index</a>
+    <a href="#resume">Resume</a>
+    <a href="#contact">Contact</a>
+  </header>
 
-  <section class="hero">
-    <!-- Replace src with your local image path, e.g., images/profile.jpg -->
-    <img src="images/Nathan_Flachman_Headshot.jpeg" alt="Nathan Flachman">
-    <h1>Nathan Flachman</h1>
+  <!-- ============================================= -->
+  <!-- HERO REVEAL -->
+  <!-- ============================================= -->
+  <section class="hero" id="top">
+    <!-- Using exact path Nathan_Flachman_Headshot.jpeg with fallback to .png/.jpg -->
+    <img src="images/Nathan_Flachman_Headshot.jpeg" onerror="this.onerror=null; this.src='images/Nathan_Flachman_Headshot.png';" alt="Nathan Flachman">
+    <div class="eyebrow">Mechanical Engineering — Portfolio</div>
+    <h1 class="glow-fill">Nathan Flachman</h1>
+    <div class="role-tag">Anderson University · Design &amp; Simulation</div>
     <p>Mechanical engineering student at Anderson University. Design, simulation, and hands-on builds.</p>
+    <div class="stamp">NO. 440-2026</div>
   </section>
 
-  <div class="filters">
-    <select id="typeFilter">
-      <option value="all">All Types</option>
-      <option value="simulation">Simulation</option>
-      <option value="design">Design</option>
-      <option value="cad">CAD</option>
-    </select>
-    <select id="sourceFilter">
-      <option value="all">All Sources</option>
-      <option value="academic">Academic (ENGR)</option>
-      <option value="personal">Personal / Extracurricular</option>
-    </select>
-    <input type="text" id="searchInput" placeholder="Search projects...">
+  <div class="legal-divider">
+    The projects, designs, and analyses shown on this site are the original
+    academic and personal work of Nathan Flachman. Any resemblance to other
+    engineering disciplines, living or dead, is purely coincidental.
   </div>
 
-  <main id="projects">
-    <h2>Selected Projects</h2>
-    <div class="grid">
+  <!-- ============================================= -->
+  <!-- INDEX OF PROJECTS (All Blue) -->
+  <!-- ============================================= -->
+  <section class="index-section" id="index">
+    <div class="index-label">// Index of Projects</div>
 
-      <!-- Project 1: links down to the full case study -->
-      <div class="card" data-type="simulation" data-source="academic">
-        <span class="tag">SolidWorks</span>
-        <img src="https://placehold.co/500x300/3B6E9C/F0EAD8?text=Table+FEA" alt="Table structural and vibration analysis">
-        <div class="body">
-          <h3>Table Structural &amp; Vibration Analysis</h3>
-          <p>Von Mises stress mapping, deformation, and modal/vibration analysis on a Maple table design, plus a drop test, run in SolidWorks Simulation.</p>
-          <div class="meta">ENGR 440 · Anderson University · 2026</div>
-          <a class="view-link" href="#table-project">View full case study →</a>
-        </div>
-      </div>
+    <a class="index-entry" data-target="table-project" href="#table-project">
+      <span class="title glow-outline">TABLE FEA</span>
+      <span class="subtitle">Structural &amp; Vibration Analysis — ENGR 440</span>
+    </a>
 
-      <!-- Project 2 -->
-      <div class="card" data-type="cad" data-source="academic">
-        <span class="tag">CAD</span>
-        <img src="https://placehold.co/500x300/C23B22/F0EAD8?text=Project+Image" alt="CAD Project">
-        <div class="body">
-          <h3>Project Title</h3>
-          <p>Brief summary of design constraints, engineering decisions, and final deliverables.</p>
-          <div class="meta">Course / Lab · Year</div>
-        </div>
-      </div>
+    <a class="index-entry" data-target="nodal-project" href="#nodal-project">
+      <span class="title glow-outline">NODAL STRESS</span>
+      <span class="subtitle">16-Case Deflection Study — ENGR 440</span>
+    </a>
 
-    </div>
-  </main>
+    <a class="index-entry" data-target="drafting-project" href="#drafting-project">
+      <span class="title glow-outline">PRECISION DRAFT</span>
+      <span class="subtitle">Mechanical Drawings — ENGR 210</span>
+    </a>
+  </section>
+
+  <div class="stamp-divider">
+    <svg width="110" height="70" viewBox="0 0 110 70" fill="none">
+      <path d="M22 5H88L105 20V50L88 65H22L5 50V20L22 5Z" stroke="#4FF2FF" stroke-width="1.5"/>
+      <line x1="5" y1="35" x2="105" y2="35" stroke="#4FF2FF" stroke-width="1"/>
+      <line x1="55" y1="5" x2="55" y2="65" stroke="#4FF2FF" stroke-width="1"/>
+    </svg>
+    <div class="refno">No. 21025 · ENGR-440</div>
+  </div>
 
   <!-- ============================================= -->
-  <!-- FULL CASE STUDY: Table Structural & Vibration Analysis -->
+  <!-- PROJECT 1: Table FEA (Collapsed by default) -->
   <!-- ============================================= -->
-  <section class="case-study" id="table-project">
+  <details class="project-reveal" id="table-project">
+    <summary>
+      <div class="kicker">SolidWorks Simulation</div>
+      <h2 class="glow-fill">Table Structural &amp; Vibration Analysis</h2>
+      <div class="meta-line">ENGR 440 · Anderson University · Material: Maple · 9/14/2026</div>
+      <div class="toggle-indicator">+</div>
+      <div class="toggle-hint">Click to expand</div>
+    </summary>
 
-    <div class="case-study-header">
-      <span class="tag">SolidWorks Simulation</span>
-      <h2>Table Structural &amp; Vibration Analysis</h2>
-      <div class="meta-row">
-        <span>ENGR 440</span> · Anderson University · Material: Maple · 9/14/2026
-      </div>
-      <p>
-        Using a table design modeled in SolidWorks, I ran a series of static and dynamic
-        finite-element studies to evaluate how the structure responds to a 200&nbsp;lb load
-        applied at four different locations, characterized the resulting deformation, and
-        extracted the first three vibration mode shapes and natural frequencies.
+    <div class="reveal-body">
+      <p class="desc">
+        Static and dynamic finite-element studies on a Maple table design —
+        evaluating response to a 200&nbsp;lb load at four locations, the
+        resulting deformation, the first three vibration mode shapes and
+        natural frequencies, and a drop test for impact response.
       </p>
+
+      <h3 class="cs-subhead">Static Stress — 200 lb Load Cases</h3>
+      <div class="sub-grid">
+        <figure class="fig">
+          <img src="images/narrow_edge_stress.png" alt="Von Mises stress map, 200 lb load at one narrow edge">
+          <figcaption><span class="fig-title">A · One narrow edge</span> Reaction forces carry through the support legs while stress concentrates near the loaded edge.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="images/both_narrow_edges.png" alt="Von Mises stress map, 200 lb load at both narrow edges">
+          <figcaption><span class="fig-title">B · Both narrow edges</span> Load split across both narrow ends produces a more even stress gradient across the span.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="images/table_center.png" alt="Von Mises stress map, 200 lb load at middle of table">
+          <figcaption><span class="fig-title">C · Middle of the table</span> Center-loaded case, showing displacement magnitude across the curved surface.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="images/long_edge.png" alt="Von Mises stress map, 200 lb load at one long side">
+          <figcaption><span class="fig-title">D · One long side</span> Load along a long edge, modeled as a curved beam-like structure — concentrations along the loaded span.</figcaption>
+        </figure>
+      </div>
+
+      <h3 class="cs-subhead">Deformation — Case A</h3>
+      <div class="sub-grid">
+        <figure class="fig">
+          <img src="images/narrow_edge_displacement.png" alt="Deformation of table end under 200 lb load at narrow edge">
+          <figcaption><span class="fig-title">Narrow-edge loading</span> Displacement plot of the loaded end under 200 lb force; purple arrows mark load points.</figcaption>
+        </figure>
+      </div>
+
+      <h3 class="cs-subhead">Vibration Modes — First Three Harmonics</h3>
+      <div class="sub-grid">
+        <figure class="fig">
+          <img src="images/frequency_one.png" alt="Vibration mode shape map, mode 1">
+          <figcaption><span class="fig-title">Mode 1</span> First natural mode shape under Case A boundary conditions.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="images/frequency_two.png" alt="Vibration mode shape map, mode 2">
+          <figcaption><span class="fig-title">Mode 2</span> Second harmonic mode shape and corresponding frequency.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="images/frequency_three.png" alt="Vibration mode shape map, mode 3">
+          <figcaption><span class="fig-title">Mode 3</span> Third harmonic mode, completing the first three natural frequencies.</figcaption>
+        </figure>
+      </div>
+
+      <h3 class="cs-subhead">Vibration Mode Animation</h3>
+      <div class="video-block">
+        <video controls poster="https://placehold.co/900x500/0A0E14/4FF2FF?text=Mode+2+Animation">
+          <source src="videos/mode2-animation.mp4" type="video/mp4">
+          Your browser does not support embedded video.
+        </video>
+        <figcaption>Animation of vibration mode 2, showing the oscillatory deflection pattern over one cycle.</figcaption>
+      </div>
+
+      <h3 class="cs-subhead">Drop Test</h3>
+      <div class="drop-test-note">
+        Add your drop-test screenshot or clip here once exported from SolidWorks.
+        Swap this note for a <code>&lt;figure class="fig"&gt;</code> image block or
+        another <code>.video-block</code>, matching the pattern above.
+      </div>
+
+      <a class="back-link" href="#index">← Back to Index</a>
     </div>
+  </details>
 
-    <!-- A) Four stress maps -->
-    <h3 class="cs-subhead">Static Stress Analysis — 200 lb Load Cases</h3>
-    <div class="sub-grid">
-
-      <figure class="fig">
-        <img src="images/narrow_edge_stress.png" alt="Von Mises stress map, 200 lb load at one narrow edge">
-        <figcaption>
-          <span class="fig-title">A · One narrow edge</span>
-          Von Mises stress distribution from a 200 lb load applied at the edge of one narrow
-          end of the tabletop. Blue support legs and pad points carry the reaction load while
-          stress concentrates near the loaded edge.
-        </figcaption>
-      </figure>
-      
-      <figure class="fig">
-        <img src="images/both_narrow_edges.png" alt="Von Mises stress map, 200 lb load at both narrow edges">
-        <figcaption>
-          <span class="fig-title">B · Both narrow edges</span>
-          Stress result with the 200 lb load split across both narrow ends. The curved
-          tabletop shows a more even rainbow stress gradient across the span compared to the
-          single-edge case.
-        </figcaption>
-      </figure>
-      
-      <figure class="fig">
-        <img src="images/table_center.png" alt="Von Mises stress map, 200 lb load at middle of table">
-        <figcaption>
-          <span class="fig-title">C · Middle of the table</span>
-          Deformation/stress plot for the center-loaded case, showing displacement magnitude
-          across the curved surface with the color scale mapping smaller (blue) to larger
-          (red) values.
-        </figcaption>
-      </figure>
-      
-      <figure class="fig">
-        <img src="images/long_edge.png" alt="Von Mises stress map, 200 lb load at one long side">
-        <figcaption>
-          <span class="fig-title">D · One long side</span>
-          Stress result for the load applied along a long edge, modeled here as a curved
-          beam/bridge-like structure — orange-to-red stress concentrations appear along the
-          loaded span.
-        </figcaption>
-      </figure>
-
-    </div>
-
-    <!-- B) Deformation -->
-    <h3 class="cs-subhead">Deformation — Case A (One Narrow Edge)</h3>
-    <div class="sub-grid">
-      <figure class="fig">
-        <img src="images/narrow_edge_displacement.png" alt="Deformation of table end under 200 lb load at narrow edge">
-        <figcaption>
-          <span class="fig-title">Deformation, narrow-edge loading</span>
-          Displacement plot of the loaded end under the 200 lb narrow-edge load. Purple load
-          arrows mark the applied force locations, with the color legend mapping response
-          magnitude across the seat/tabletop.
-        </figcaption>
-      </figure>
-    </div>
-
-    <!-- C) Three vibration mode maps -->
-    <h3 class="cs-subhead">Vibration Mode Analysis — First Three Harmonics</h3>
-    <div class="sub-grid">
-
-      <figure class="fig">
-        <img src="images/frequency_one.png" alt="Vibration mode shape map, mode 1">
-        <figcaption>
-          <span class="fig-title">Mode 1</span>
-          First natural mode shape under the Case A boundary conditions, with amplitude
-          mapped by color across the curved plate.
-        </figcaption>
-      </figure>
-      
-      <figure class="fig">
-        <img src="images/frequency_two.png" alt="Vibration mode shape map, mode 2">
-        <figcaption>
-          <span class="fig-title">Mode 2</span>
-          Second harmonic mode shape and corresponding frequency, extracted from the
-          frequency study's mode list.
-        </figcaption>
-      </figure>
-      
-      <figure class="fig">
-        <img src="images/frequency_three.png" alt="Vibration mode shape map, mode 3">
-        <figcaption>
-          <span class="fig-title">Mode 3</span>
-          Third harmonic mode shape, completing the first three natural frequencies used for
-          the vibration study.
-        </figcaption>
-      </figure>
-      
-    </div>
-
-    <!-- D) Embedded video -->
-    <h3 class="cs-subhead">Vibration Mode Animation</h3>
-    <div class="video-block">
-      <!--
-        Upload your mode-2 animation as an .mp4 into a /videos/ folder in your repo
-        (e.g. videos/mode2-animation.mp4) and update the src below.
-        This embeds the actual video file, not a link to it.
-      -->
-      <video controls poster="https://placehold.co/900x500/14171A/C9BFA3?text=Mode+2+Animation">
-        <source src="videos/mode2-animation.mp4" type="video/mp4">
-        Your browser does not support embedded video.
-      </video>
-      <figcaption>Animation of vibration mode 2, showing the oscillatory deflection pattern over one cycle.</figcaption>
-    </div>
-
-    <a class="back-to-projects" href="#projects">← Back to all projects</a>
-  </section>
-
-<section class="case-study" id="resume">
-  <div class="case-study-header">
-    <span class="tag">Resume</span>
-    <h2>Resume</h2>
-    <p>Mechanical engineering student — work experience, coursework, projects, and technical skills.</p>
+  <div class="legal-divider">
+    Ownership of the analyses and drawings on this site is retained by their
+    author. Reproduction for academic reference is welcomed; unauthorized
+    claim of original authorship is not.
   </div>
 
-<div class="fig" style="margin: 0 auto 20px; overflow: hidden; width: min(650px, 90%); aspect-ratio: 8.5 / 11;">
-  <iframe 
-    src="docs/resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" 
-    style="width:100%; height:100%; border:none; display:block;" 
-    title="Nathan Flachman Resume">
-  </iframe>
-</div>
+  <!-- ============================================= -->
+  <!-- PROJECT 2: Nodal Stress (Collapsed by default) -->
+  <!-- ============================================= -->
+  <details class="project-reveal" id="nodal-project">
+    <summary>
+      <div class="kicker">FEA / SolidWorks</div>
+      <h2 class="glow-outline">Nodal Stress &amp; Deflection</h2>
+      <div class="meta-line">ENGR 440 · Static Simulation · 2026</div>
+      <div class="toggle-indicator">+</div>
+      <div class="toggle-hint">Click to expand</div>
+    </summary>
 
-  <a class="view-link" href="docs/resume.pdf" download style="display:inline-block; background: var(--ink); color: var(--cream); padding: 10px 18px; text-decoration:none; font-size:14px; font-weight:600;">
-    ⬇ Download PDF
-  </a>
-</section>
-  
+    <div class="reveal-body">
+      <p class="desc">
+        16-case finite element verification suite covering cantilever bending,
+        shear-moment diagrams, axial/bending rods, and pipe assemblies.
+      </p>
+      <div class="sub-grid">
+        <figure class="fig">
+          <img src="https://placehold.co/500x300/0A0E14/4FF2FF?text=Simulations+1+%26+2" alt="Nodal stress simulations 1 and 2">
+          <figcaption><span class="fig-title">Simulations #1 &amp; #2</span> Shear-moment and displacement studies on beam and tube geometries.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="https://placehold.co/500x300/0A0E14/4FF2FF?text=Simulations+5+%26+6" alt="Nodal stress simulations 5 and 6">
+          <figcaption><span class="fig-title">Simulations #5 &amp; #6</span> Axial/bending rod analysis and bolted assembly load study.</figcaption>
+        </figure>
+      </div>
+      <a class="back-link" href="#index">← Back to Index</a>
+    </div>
+  </details>
+
+  <div class="legal-divider">
+    Drawings produced in accordance with ASME Y14.5 geometric dimensioning
+    and tolerancing standards, submitted for academic review only.
+  </div>
+
+  <!-- ============================================= -->
+  <!-- PROJECT 3: Precision Drafting (Collapsed by default) -->
+  <!-- ============================================= -->
+  <details class="project-reveal" id="drafting-project">
+    <summary>
+      <div class="kicker">CAD / Drafting</div>
+      <h2 class="glow-outline">Precision Mechanical Drawings</h2>
+      <div class="meta-line">ENGR 210 · Engineering Graphics · 2026</div>
+      <div class="toggle-indicator">+</div>
+      <div class="toggle-hint">Click to expand</div>
+    </summary>
+
+    <div class="reveal-body">
+      <p class="desc">
+        Full dimensioning, geometric tolerancing, and orthographic projection
+        drawing packages for machined maple furniture.
+      </p>
+      <div class="sub-grid">
+        <figure class="fig">
+          <img src="https://placehold.co/500x300/0A0E14/4FF2FF?text=Table+Top+Drawing" alt="Table top engineering drawing">
+          <figcaption><span class="fig-title">Table Top</span> Boss-extrude dimensioning, Anderson University ENGR 210, Section T01.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="https://placehold.co/500x300/0A0E14/4FF2FF?text=Assembly+Drawing" alt="Table assembly engineering drawing">
+          <figcaption><span class="fig-title">Full Assembly</span> Maple material callouts, ENGR 440 HW1, Section 101.</figcaption>
+        </figure>
+      </div>
+      <a class="back-link" href="#index">← Back to Index</a>
+    </div>
+  </details>
+
+  <div class="stamp-divider">
+    <svg width="110" height="70" viewBox="0 0 110 70" fill="none">
+      <path d="M22 5H88L105 20V50L88 65H22L5 50V20L22 5Z" stroke="#4FF2FF" stroke-width="1.5"/>
+      <line x1="5" y1="35" x2="105" y2="35" stroke="#4FF2FF" stroke-width="1"/>
+      <line x1="55" y1="5" x2="55" y2="65" stroke="#4FF2FF" stroke-width="1"/>
+    </svg>
+    <div class="org">Anderson University · School of Engineering</div>
+  </div>
+
+  <!-- ============================================= -->
+  <!-- RESUME (Always visible) -->
+  <!-- ============================================= -->
+  <section class="resume-section" id="resume">
+    <div class="kicker">Résumé</div>
+    <h2 class="glow-fill" style="font-size: clamp(30px, 5vw, 44px);">Resume</h2>
+    <p class="desc">Mechanical engineering student — coursework, project experience, and technical skills.</p>
+
+    <div class="resume-fig">
+      <iframe
+        src="docs/resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
+        style="width:100%; height:100%; border:none; display:block;"
+        title="Nathan Flachman Resume">
+      </iframe>
+    </div>
+
+    <div class="resume-actions">
+      <a href="docs/resume.pdf" target="_blank" rel="noopener">View Full Screen</a>
+      <a href="docs/resume.pdf" download>⬇ Download PDF</a>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- FOOTER -->
+  <!-- ============================================= -->
   <footer id="contact">
     <p>nathan@example.com — <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com" target="_blank" rel="noopener">GitHub</a></p>
+    <p class="legal">
+      The events, characters, and logos depicted on this page are the
+      real academic and personal work of Nathan Flachman.
+    </p>
+    <div class="refno">NO. 21025 · N.F Portfolio Build · 2026</div>
   </footer>
+
+  <script>
+    // Smooth jump & auto-expand when index link is clicked
+    document.querySelectorAll('.index-entry[data-target]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        var target = document.getElementById(link.dataset.target);
+        if (target && target.tagName === 'DETAILS') {
+          target.open = true;
+        }
+      });
+    });
+
+    // Toggle indicator (+ / ×) state updater
+    document.querySelectorAll('details.project-reveal').forEach(function (d) {
+      d.addEventListener('toggle', function () {
+        var indicator = d.querySelector('.toggle-indicator');
+        var hint = d.querySelector('.toggle-hint');
+        if (d.open) {
+          indicator.textContent = '×';
+          hint.textContent = 'Click to collapse';
+        } else {
+          indicator.textContent = '+';
+          hint.textContent = 'Click to expand';
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
