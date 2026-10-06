@@ -14,17 +14,18 @@
      - Near-black high-contrast backdrop with scanlines
      - Clean typographic credits hierarchy
      - Collapsible project reveal sections (closed by default)
+     - Only two project entries: Table FEA + one placeholder
   ========================================================= */
   :root {
     --bg: #06080C;
     --panel: #0A0E14;
     --panel-border: #142834;
-    
+
     --neon-blue: #4FF2FF;        /* Primary electric glow */
     --neon-blue-bright: #94FBFF; /* Highlight / core glow */
     --neon-blue-dim: #216775;    /* Muted accent / subheaders */
     --hairline: #102129;
-    
+
     --text: #EDF8FC;
     --muted: #5E7E88;
   }
@@ -479,7 +480,6 @@
   <!-- HERO REVEAL -->
   <!-- ============================================= -->
   <section class="hero" id="top">
-    <!-- Using exact path Nathan_Flachman_Headshot.jpeg with fallback to .png/.jpg -->
     <img src="images/Nathan_Flachman_Headshot.jpeg" onerror="this.onerror=null; this.src='images/Nathan_Flachman_Headshot.png';" alt="Nathan Flachman">
     <div class="eyebrow">Mechanical Engineering — Portfolio</div>
     <h1 class="glow-fill">Nathan Flachman</h1>
@@ -495,7 +495,7 @@
   </div>
 
   <!-- ============================================= -->
-  <!-- INDEX OF PROJECTS (All Blue) -->
+  <!-- INDEX OF PROJECTS (All Blue) — only 2 entries now -->
   <!-- ============================================= -->
   <section class="index-section" id="index">
     <div class="index-label">// Index of Projects</div>
@@ -505,14 +505,9 @@
       <span class="subtitle">Structural &amp; Vibration Analysis — ENGR 440</span>
     </a>
 
-    <a class="index-entry" data-target="nodal-project" href="#nodal-project">
-      <span class="title glow-outline">NODAL STRESS</span>
-      <span class="subtitle">16-Case Deflection Study — ENGR 440</span>
-    </a>
-
-    <a class="index-entry" data-target="drafting-project" href="#drafting-project">
-      <span class="title glow-outline">PRECISION DRAFT</span>
-      <span class="subtitle">Mechanical Drawings — ENGR 210</span>
+    <a class="index-entry" data-target="placeholder-project" href="#placeholder-project">
+      <span class="title glow-outline">PROJECT TITLE</span>
+      <span class="subtitle">Course / Lab · Year</span>
     </a>
   </section>
 
@@ -616,66 +611,27 @@
   </div>
 
   <!-- ============================================= -->
-  <!-- PROJECT 2: Nodal Stress (Collapsed by default) -->
+  <!-- PROJECT 2: Single Placeholder (Collapsed by default) -->
   <!-- ============================================= -->
-  <details class="project-reveal" id="nodal-project">
+  <details class="project-reveal" id="placeholder-project">
     <summary>
-      <div class="kicker">FEA / SolidWorks</div>
-      <h2 class="glow-outline">Nodal Stress &amp; Deflection</h2>
-      <div class="meta-line">ENGR 440 · Static Simulation · 2026</div>
+      <div class="kicker">Course / Lab</div>
+      <h2 class="glow-outline">Project Title</h2>
+      <div class="meta-line">Course / Lab · Year</div>
       <div class="toggle-indicator">+</div>
       <div class="toggle-hint">Click to expand</div>
     </summary>
 
     <div class="reveal-body">
       <p class="desc">
-        16-case finite element verification suite covering cantilever bending,
-        shear-moment diagrams, axial/bending rods, and pipe assemblies.
+        Brief summary of design constraints, engineering decisions, and final
+        deliverables. Replace this placeholder with details for your next
+        project.
       </p>
       <div class="sub-grid">
         <figure class="fig">
-          <img src="https://placehold.co/500x300/0A0E14/4FF2FF?text=Simulations+1+%26+2" alt="Nodal stress simulations 1 and 2">
-          <figcaption><span class="fig-title">Simulations #1 &amp; #2</span> Shear-moment and displacement studies on beam and tube geometries.</figcaption>
-        </figure>
-        <figure class="fig">
-          <img src="https://placehold.co/500x300/0A0E14/4FF2FF?text=Simulations+5+%26+6" alt="Nodal stress simulations 5 and 6">
-          <figcaption><span class="fig-title">Simulations #5 &amp; #6</span> Axial/bending rod analysis and bolted assembly load study.</figcaption>
-        </figure>
-      </div>
-      <a class="back-link" href="#index">← Back to Index</a>
-    </div>
-  </details>
-
-  <div class="legal-divider">
-    Drawings produced in accordance with ASME Y14.5 geometric dimensioning
-    and tolerancing standards, submitted for academic review only.
-  </div>
-
-  <!-- ============================================= -->
-  <!-- PROJECT 3: Precision Drafting (Collapsed by default) -->
-  <!-- ============================================= -->
-  <details class="project-reveal" id="drafting-project">
-    <summary>
-      <div class="kicker">CAD / Drafting</div>
-      <h2 class="glow-outline">Precision Mechanical Drawings</h2>
-      <div class="meta-line">ENGR 210 · Engineering Graphics · 2026</div>
-      <div class="toggle-indicator">+</div>
-      <div class="toggle-hint">Click to expand</div>
-    </summary>
-
-    <div class="reveal-body">
-      <p class="desc">
-        Full dimensioning, geometric tolerancing, and orthographic projection
-        drawing packages for machined maple furniture.
-      </p>
-      <div class="sub-grid">
-        <figure class="fig">
-          <img src="https://placehold.co/500x300/0A0E14/4FF2FF?text=Table+Top+Drawing" alt="Table top engineering drawing">
-          <figcaption><span class="fig-title">Table Top</span> Boss-extrude dimensioning, Anderson University ENGR 210, Section T01.</figcaption>
-        </figure>
-        <figure class="fig">
-          <img src="https://placehold.co/500x300/0A0E14/4FF2FF?text=Assembly+Drawing" alt="Table assembly engineering drawing">
-          <figcaption><span class="fig-title">Full Assembly</span> Maple material callouts, ENGR 440 HW1, Section 101.</figcaption>
+          <img src="https://placehold.co/500x300/0A0E14/4FF2FF?text=Project+Image" alt="Placeholder project image">
+          <figcaption><span class="fig-title">Figure 1</span> Replace with a real image and caption once this project is ready.</figcaption>
         </figure>
       </div>
       <a class="back-link" href="#index">← Back to Index</a>
@@ -695,7 +651,7 @@
   <!-- RESUME (Always visible) -->
   <!-- ============================================= -->
   <section class="resume-section" id="resume">
-    <div class="kicker">Résumé</div>
+    <div class="kicker">Resume</div>
     <h2 class="glow-fill" style="font-size: clamp(30px, 5vw, 44px);">Resume</h2>
     <p class="desc">Mechanical engineering student — coursework, project experience, and technical skills.</p>
 
@@ -717,7 +673,7 @@
   <!-- FOOTER -->
   <!-- ============================================= -->
   <footer id="contact">
-    <p>nathan@example.com — <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com" target="_blank" rel="noopener">GitHub</a></p>
+    <p>ns.flachman@gmail.com — <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></p>
     <p class="legal">
       The events, characters, and logos depicted on this page are the
       real academic and personal work of Nathan Flachman.
