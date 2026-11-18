@@ -14,7 +14,7 @@
      - Near-black high-contrast backdrop with scanlines
      - Clean typographic credits hierarchy
      - Collapsible project reveal sections (closed by default)
-     - Only two project entries: Table FEA + one placeholder
+     - Project entries: Table FEA in SolidWorks + in Ansys
   ========================================================= */
   :root {
     --bg: #06080C;
@@ -443,6 +443,7 @@
     margin-bottom: 8px;
   }
   .badge-card p { font-size: 12px; color: var(--muted); }
+  .badge-card .badge-meta { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--neon-blue-dim); }
 
   /* Miscellaneous list */
   .misc-list {
@@ -566,19 +567,15 @@
     <div class="index-label">// Index of Projects</div>
 
     <a class="index-entry" data-target="table-project" href="#table-project">
-      <span class="title glow-outline">TABLE FEA</span>
+      <span class="title glow-outline">TABLE FEA 1</span>
       <span class="subtitle">Structural &amp; Vibration Analysis in SolidWorks — ENGR 440</span>
     </a>
 
     <a class="index-entry" data-target="ansys-project" href="#ansys-project">
-      <span class="title glow-outline">TABLE FEA</span>
+      <span class="title glow-outline">TABLE FEA 2</span>
       <span class="subtitle">Structural &amp; Vibration Analysis in Ansys — ENGR 440</span>
     </a>
 
-    <a class="index-entry" data-target="placeholder-project" href="#placeholder-project">
-      <span class="title glow-outline">PROJECT TITLE</span>
-      <span class="subtitle">Course / Lab · Year</span>
-    </a>
   </section>
 
   <div class="stamp-divider">
@@ -771,52 +768,24 @@
   </div>
 
   <!-- ============================================= -->
-  <!-- PROJECT 2: Single Placeholder (Collapsed by default) -->
-  <!-- ============================================= -->
-  <details class="project-reveal" id="placeholder-project">
-    <summary>
-      <div class="kicker">Course / Lab</div>
-      <h2 class="glow-outline">Project Title</h2>
-      <div class="meta-line">Course / Lab · Year</div>
-      <div class="toggle-indicator">+</div>
-      <div class="toggle-hint">Click to expand</div>
-    </summary>
-
-    <div class="reveal-body">
-      <p class="desc">
-        Brief summary of design constraints, engineering decisions, and final
-        deliverables. Replace this placeholder with details for your next
-        project.
-      </p>
-      <div class="sub-grid">
-        <figure class="fig">
-          <img src="https://placehold.co/500x300/0A0E14/4FF2FF?text=Project+Image" alt="Placeholder project image">
-          <figcaption><span class="fig-title">Figure 1</span> Replace with a real image and caption once this project is ready.</figcaption>
-        </figure>
-      </div>
-      <a class="back-link" href="#index">← Back to Index</a>
-    </div>
-  </details>
-
-  <!-- ============================================= -->
   <!-- ACHIEVEMENTS / BADGES (Always visible) -->
   <!-- Add a badge: copy one .badge-card, swap image, title, description -->
   <!-- ============================================= -->
   <section class="achievements-section" id="achievements">
     <div class="kicker">Achievements</div>
     <h2 class="glow-fill" style="font-size: clamp(30px, 5vw, 44px);">Badges &amp; Skills</h2>
-    <p class="desc">Smaller milestones, certifications, and skills picked up along the way.</p>
+    <p class="desc">Course completions and skills picked up along the way.</p>
 
     <div class="badge-grid">
       <div class="badge-card">
-        <img src="https://placehold.co/200x200/0A0E14/4FF2FF?text=Ansys" alt="Ansys badge">
-        <h3>Learned Ansys</h3>
-        <p>Short description of what you learned or earned, and where you used it.</p>
+        <img src="https://placehold.co/200x200/0A0E14/4FF2FF?text=Thermal" alt="Thermal Management of CPUs badge">
+        <h3>Thermal Management of CPUs</h3>
+        <p class="badge-meta">Course Completion · Oct 29, 2026</p>
       </div>
       <div class="badge-card">
-        <img src="https://placehold.co/200x200/0A0E14/4FF2FF?text=Badge" alt="Achievement badge">
-        <h3>Achievement Title</h3>
-        <p>Short description of the achievement.</p>
+        <img src="https://placehold.co/200x200/0A0E14/4FF2FF?text=Ansys" alt="Structural Simulation Using Ansys Discovery badge">
+        <h3>Structural Simulation Using Ansys Discovery</h3>
+        <p class="badge-meta">Course Completion · Oct 04, 2026</p>
       </div>
     </div>
   </section>
